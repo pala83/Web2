@@ -20,4 +20,5 @@ table{
 .resaltado, .externo{
     background-color: yellow;
     color: blue;
+    font-weight: bold;
 }
