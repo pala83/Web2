@@ -12,4 +12,4 @@
     }
 ?>
 
-<a href="ej3.html"><-volver atras</a>
+<a href="index.html"><-volver atras</a>

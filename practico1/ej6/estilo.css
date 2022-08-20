@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+table{
+    border-spacing: 0px ;
+}
+
+.resaltado, .interno, .externo{
+    text-align: center;
+    padding: 2px;
+    width: 25px;
+}
+
+.interno, .resaltado{
+    border: 1px solid black;
+}
+
+.resaltado, .externo{
+    background-color: yellow;
+    color: blue;
+}
