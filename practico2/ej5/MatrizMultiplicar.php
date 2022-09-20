@@ -16,12 +16,14 @@ function fila($valor, $tam){
     return $retorno;
 }
 
-function matriz($tamano){
+function matriz($string){
+    $tamano = (int) $string;
     $retorno = "";
     for($i=1; $i<=$tamano; $i++){
         $retorno .= "<tr>" . fila($i, $tamano) . "</tr>" ;
     }
     return $retorno;
 }
+
 
 ?>

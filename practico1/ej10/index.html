@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./estilos.css">
+  <title>Ejercicio 10</title>
+</head>
+<body>
+  <!--
+  * - Formulario que envia los datos a "showData.php" atraves del metodo POST.
+  * - con 'autocomplete="off"', cada campo del formulario no nos da una lista de sujerencias
+  * en base a valores que hayamos puesto previamente.
+  -->
+  <section class="mainContainer">
+    <form autocomplete="off" id="formulario">
+      <div class="form__options">
+        <div class="form__option">
+          <label><span>Nombre:</span><input type="text" name="nombre" required></label>
+        </div>
+        <div class="form__option">
+          <label><span>Apellido:</span><input type="text" name="apellido" required></label>
+        </div>
+        <div class="form__option">
+          <label><span>Edad:</span><input type="number" name="edad" required></label>
+        </div>
+      </div>
+      <button type="submit">Enviar</button>
+      <div class="contenedorRespuesta">
+        <p id="respuesta"></p>
+      </div>
+    </form>  
+  </section>
+  <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  min-height: 100vh;
+  background: linear-gradient(90deg, rgb(255, 149, 81), rgb(255, 74, 74));
+}
+.contenedor{
+  width: min(90vw, 50rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: auto;
+  padding: 1rem;
+}
+
+#contenedorElementos{
+  width: min(90vw, 50rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: auto;
+  padding: 1rem;
+}
+ul{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 1rem;
+}
+a{
+  color: rgb(255, 255, 255);
+}
+a:hover{
+  color: rgb(166, 35, 73);
+}

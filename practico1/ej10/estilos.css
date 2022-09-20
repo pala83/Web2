@@ -1,0 +1,59 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(150deg, rgb(23, 34, 54), rgb(50, 25, 62));
+  }
+  .contenedorRespuesta{
+    margin-top: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    border: solid 1px red;
+    background-color: orange;
+  }
+  form{
+    background-color: rgb(234, 234, 234);
+    display: grid;
+    gap: 1.5rem;
+    padding: 1rem;
+    border-radius: .4rem;
+    box-shadow: 0 0 16px 6px black;
+    width: min(90%, 30rem);
+    position: relative;
+  }
+  .form__options{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .form__option{
+    background-color: red;
+  }
+  .form__option label{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .form__option label span{
+    width: 5rem;
+  }
+  .form__option label input{
+    width: 100%;
+  }
+  form button{
+    max-width: 5rem;
+    padding: .3rem;
+    justify-self: flex-end;
+  }
