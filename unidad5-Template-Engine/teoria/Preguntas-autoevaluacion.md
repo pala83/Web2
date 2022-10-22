@@ -1,11 +1,11 @@
-1. Cual de estas son ventajas de trabajar con Smarty?
+## 1. Cual de estas son ventajas de trabajar con Smarty?
     - Separar la lógica de los datos de la presentación de los mismos
     - Reutilizar codigo HTML
     - Que el diseñador grafico puede trabajar en paralelo con el desarrollador
-2. Cual de las siguientes configuraciones de .gitignore es mas apropiada para conservar nuestro desarrollo de plantillas .tpl y no registrar archivos innecesarios:
+## 2. Cual de las siguientes configuraciones de .gitignore es mas apropiada para conservar nuestro desarrollo de plantillas .tpl y no registrar archivos innecesarios:
 > templates_c/
 
-3. En el siguiente método PHP, que código se necesita en la línea 2:
+## 3. En el siguiente método PHP, que código se necesita en la línea 2:
 ~~~ php
 1: public function mostrarElemento($elemento) {
 2:  ?
@@ -18,7 +18,7 @@
 ~~~
 > $smarty = new Smarty();
 
-4. Para el siguiente código de plantilla Smarty, que recoree una lista $elemento.
+## 4. Para el siguiente código de plantilla Smarty, que recoree una lista $elemento.
 ~~~ php
 {foreach ?}
     <li>Elemento {$elemento}</li>

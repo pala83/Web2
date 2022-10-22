@@ -1,7 +1,10 @@
-1. Las URLs semanticas son fáciles de entender para los usuarios. **VERDADERO**
-2. Cuando se hacen llamadas del tipo www.calculadora.com/sumar/2/3 puedo tener tantos archivos PHP como combinaciones existan. **FALSO**
-3. Las URL semanticas favorecen el posicionamiento Web. **VERDADERO**
-4. El siguiente archivo .htaccess define la posibilidad de reescribir URL en forma amigable.
+## 1. Las URLs semanticas son fáciles de entender para los usuarios. 
+**VERDADERO**
+## 2. Cuando se hacen llamadas del tipo www.calculadora.com/sumar/2/3 puedo tener tantos archivos PHP como combinaciones existan. 
+**FALSO**
+## 3. Las URL semanticas favorecen el posicionamiento Web. 
+**VERDADERO**
+## 4. El siguiente archivo .htaccess define la posibilidad de reescribir URL en forma amigable.
 ~~~ xml
 <IfModule mod_rewrite.c>
     RewriteEngine On
@@ -22,7 +25,7 @@ Cual de las siguientes modificaciones permite redirigir a un enrutador que se de
     RewriteRule ^(.*)$ enrutador.php?parametro=$1 [QSA,L]
 </IfModule>
 ~~~
-5. Considerando el siguente código de enrutador, y que las funciones realizan el calculo correctamente que describen.
+## 5. Considerando el siguente código de enrutador, y que las funciones realizan el calculo correctamente que describen.
 >Ejemplo: la funcion sumar(x, y) es el resultado de x+y, restar(x, y) es el resultado de x-y, y asi para multiplicar, dividir.
 
 ~~~ php
@@ -70,7 +73,7 @@ Cual sera el resultado que mostrará el navegador para la siguiente URL:
 >http://localhost/suma/3/2
 >> Respuesta: 1
 
-6. Si el parametro $_GET['action'] trae un contenido 'suma/3/1/' y se aplica la siguiente instrucción:
+## 6. Si el parametro $_GET['action'] trae un contenido 'suma/3/1/' y se aplica la siguiente instrucción:
     ~~~ php
     $partesURL = explode('/', $_GET['action']);
     ~~~
