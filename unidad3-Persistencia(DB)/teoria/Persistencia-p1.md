@@ -122,7 +122,7 @@ SQL nos permite trabajar con una base de datos de manera estructurada siendo un 
 - Buscar muchos datos en poco tiempo
 
 ## Creacion de tablas
-~~~
+~~~ sql
 CREATE TABLE nombreDB . Transactions(
     Transaction_ID INT NOT NULL,
     Customer_id INT NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE nombreDB . Transactions(
 ) ENGINE = InnoDB;
 ~~~
 ## Agregar registros
-~~~
+~~~ sql
 INSERT INTO Transactions (Transaction_ID, Customer_id, Channel, Product, Price, Discount) VALUES (1000123, 60067, 'Web', 'Book', 9.95, NULL);
 INSERT INTO Transactions (Transaction_ID, Customer_id, Channel, Product, Price, Discount) VALUES (1000124, 12345, 'Store', 'Book', 11.95, NULL);
 INSERT INTO Transactions (Transaction_ID, Customer_id, Channel, Product, Price, Discount) VALUES (1000125, 23451, 'Store', 'DVD', 14.95, NULL);
@@ -146,14 +146,14 @@ INSERT INTO Transactions (Transaction_ID, Customer_id, Channel, Product, Price, 
 INSERT INTO Transactions (Transaction_ID, Customer_id, Channel, Product, Price, Discount) VALUES (1000131, 12345, 'Store', 'Book', 7.95, NULL);
 ~~~
 ## Cambiar registros
-~~~
+~~~ sql
 UPDATE TABLE_NAME
 SET column1 = value1, column2= value 2
 WHERE condition;
     UPDATE Transactions SET Channel='Store' WHERE Transaction_ID=1000123
 ~~~
 ## Borrar registros
-~~~
+~~~ sql
 DELETE FROM TABLE_NAME
 WHERE condition;
     DELETE FROM Transactions WHERE Transaction_ID=1000123;
@@ -166,7 +166,7 @@ WHERE condition;
 | WHERE     | Agrega filtros que restringe que filas/registros se recuperan **(opcional)** |
 | ORDER BY  | Define el orden en el que se obtienen lso resultados **(opcional)** |
 
-~~~
+~~~ sql
 SELECT FIELD_1, FIELD_2, ..., FIELD_N FROM TABLE_NAME
 SELECT CHANEL, PRODUCT, PRICE FROM Transactions
 SELECT * FROM TABLE_NAME    //retorna toda la tabla
@@ -192,23 +192,23 @@ ORDER BY FIELD_i DESC
 - Por lo general, asocia un campo de una tabla con la clave primaria de otra tabla o tablas
 
 Supongo que quiero crear una tabla de productos para las transacciones.
-~~~
+~~~ sql
 CREATE TABLE nombreDB.Products ( 
     Product VARCHAR(45) NOT NULL,
     Material VARCHAR(45) NULL,
     Medium VARCHAR(45) NULL,
-    PRIMARY KEY (`Product`)
+    PRIMARY KEY ('Product')
 )ENGINE = InnoDB;
 
-INSERT INTO Products (Product, Material, Medium) VALUES ('Book', 'Stock Paper', 'Visual’);
-INSERT INTO Products (Product, Material, Medium) VALUES (‘DVD’, ‘Plastic', ‘Audiovisual’);
-INSERT INTO Products (Product, Material, Medium) VALUES ('Magazine’, ‘Glossy Paper', 'Visual’);
-INSERT INTO Products (Product, Material, Medium) VALUES (‘CD’, ‘Plastic', ‘Audio’);
-INSERT INTO Products (Product, Material, Medium) VALUES (‘Newspaper', ‘Newsprint', 'Visual’);
-INSERT INTO Products (Product, Material, Medium) VALUES (‘MP3', ‘Digital’, ‘Audio’)
+INSERT INTO Products (Product, Material, Medium) VALUES ('Book', 'Stock Paper', 'Visual');
+INSERT INTO Products (Product, Material, Medium) VALUES ('DVD', 'Plastic', 'Audiovisual');
+INSERT INTO Products (Product, Material, Medium) VALUES ('Magazine', 'Glossy Paper', 'Visual');
+INSERT INTO Products (Product, Material, Medium) VALUES ('CD', 'Plastic', 'Audio');
+INSERT INTO Products (Product, Material, Medium) VALUES ('Newspaper', 'Newsprint', 'Visual');
+INSERT INTO Products (Product, Material, Medium) VALUES ('MP3','Digital', 'Audio')
 ~~~
 Agregar la clave foranea a la tabla Transactions creada anteriormente
-~~~
+~~~ sql
 ALTER TABLE Transactions
     ADD CONSTRAINT fk_Transactions_Products
     FOREIGN KEY (Product)
@@ -219,21 +219,21 @@ ALTER TABLE Transactions
 - La operación JOIN (unir) nos permite acceder a más de una tabla al mismo tiempo
 - Hay diferentes tipos de JOIN que se pueden aplicar dependiendo del tipo de resultado que esperamos obtener
 - Si queremos ver datos de dos tablas (TABLE_1 y TABLE_2) la sintaxis se ve como:
-~~~
+~~~ sql
 SELECT a.FIELD_1, ..., a.FIELD_N, b.FIELD_1, ..., b.FIELD_N
 FROM TABLE_1 a
 INNER JOIN TABLE_2 b
 ON a.KEY = b.KEY
 ~~~
 Supongamos que queremos tener más información de los productos que se compraron:
-~~~
+~~~ sql
 SELECT a.*, b.*
 FROM Transactions a
 INNER JOIN Products b
 ON a.PRODUCT = b.PRODUCT
 ~~~
 Imprimir los datos de una transacción pero solo si el material del producto es de tipo “Plastic”
-~~~
+~~~ sql
 SELECT a.* 
 FROM Transactions a
 INNER JOIN Products b 
@@ -247,13 +247,13 @@ SQL tambien tiene consultas mediante operadores:
 - Aritmeticos: + - * / %
 - Logicos: AND OR IN BETWEEN LIKE IS NULL NOT
     - **IN**: Chequea si nu nvalor o expresion esta en una lista, evita usar muchos **OR**
-    ~~~
+    ~~~ sql
     WHERE FIELD_A = 'AAA' OR FIELD_A = 'BBB' OR FIELD_A ='CCC'
     // ==
     WHERE FIELD_A IN ('AAA', 'BBB', 'CCC')
     ~~~
     - **BETWEEN**: chequea si nu nvalor o expresion esta entre otros dos valores o expresiones, alternativa a **AND**
-    ~~~
+    ~~~ sql
     WHERE FIELD_A >= 10 AND FIELD_A <= 100
     // ==
     WHERE FIELD_A BETWEEN 10 AND 100
@@ -276,7 +276,7 @@ SQL tambien tiene consultas mediante operadores:
 
 # Consultas multitabla
 Supongamos que queremos imprimir los datos de una transacción junto al material y al soporte (“medium”) del producto comprado.
-~~~
+~~~ php
 <?php
     $db = new PDO('mysql:host=localhost;' .'dbname=Prueba;charset=utf8' , 'root', '');
     $query = $db->prepare( 'SELECT * FROM Transactions');
@@ -296,7 +296,7 @@ Supongamos que queremos imprimir los datos de una transacción junto al material
 
 ## Ejemplo con filtro
 Supongamos que queremos imprimir los datos de una transacción pero solo si el material del producto es de un determinado tipo
-~~~
+~~~ php
 <?php
     $db = new PDO('mysql:host=localhost;'.'dbname=Prueba;charset=utf8', 'root', '');
     $query = $db->prepare('SELECT * FROM Transactions');
@@ -316,7 +316,7 @@ Supongamos que queremos imprimir los datos de una transacción pero solo si el m
 ~~~
 ## Ejemplo con filtro ++
 Supongamos que queremos imprimir el promedio de los precios de las transacciones donde el material del producto es de un determinado tipo
-~~~
+~~~ php
 <?php
     $db = new PDO('mysql:host=localhost;'.'dbname=Prueba;charset=utf8', 'root', '');
     $query = $db->prepare('SELECT * FROM Transactions');

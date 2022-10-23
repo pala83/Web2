@@ -34,7 +34,7 @@ Para relacionar una tabla con otra, se utilizan uno o mas atributos de la primer
 
 ## SQL syntax para FK
 
-~~~
+~~~ sql
 CREATE TABLE <table1>(
     atributte1 TYPE NOT NULL,
     .....
@@ -66,16 +66,16 @@ Si, hay muuuuuuucha data sobre los joins, pero aca vamos a usar la mas basica de
 - Permite combinar registros de distintas tablas mediante columnas de las tablas.
 - El resultado de la consulta puede retornar información de todas las tablas involucradas.
 - Distintos tipos de JOIN (que se verán en otra materia)
-~~~
+~~~ sql
 SELECT t1.column1, t1.column2, t2.column1 FROM t1 JOIN t2 ON t1.column1 = t2.column1
 ~~~
-~~~
+~~~ sql
 SELECT * FROM productos JOIN categorias ON productos.id_categoria = categorias.id_categoria
 ~~~
-~~~
+~~~ sql
 SELECT productos.*, categorias.nombre as categoria FROM productos JOIN categorias ON productos.id_categoria = categorias.id_categoria
 ~~~
-~~~
+~~~ sql
 function getProductosConCategoria() {
         $db = connect();
         $query = $db->prepare("SELECT productos.*, categorias.nombre as categoria FROM productos JOIN 

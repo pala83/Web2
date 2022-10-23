@@ -23,22 +23,22 @@ En resumen, estos son los pasos habituales para conectarnos desde nuestro códig
 ### Existen funciones especificas en PHP para acceder a una base de datos MySQL:
 
 1. **Abrimos** una conexion.
-~~~
+~~~ php
 $link = mysqli_connect($host, $user, $passwd, $db);
 ~~~
 2. **Enviamos** la consulta.
-~~~
+~~~ php
 $result = mysqli_query($link, 'SELECT * WHERE 1=1');
 $arreglo = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ~~~
 3. **Procesamos** los datos para generar el HTML.
-~~~
+~~~ php
 foreach($arreglo as $value){
     echo($value['campo']);
 }
-~~~
+~~~ 
 4. **Cerramos** la conexion.
-~~~
+~~~ php
 mysqli_close($link);
 ~~~
 
@@ -69,7 +69,7 @@ cada controlador de bases de datos que implemente la interfaz PDO puede exponer 
 
 1. Creo un archivo "info.php"
 2. Escribo el siguiente comando
-~~~
+~~~ php
 <?php phpinfo(); ?>
 ~~~
 3. Ejecuta ese archivo en tu web server
@@ -92,13 +92,13 @@ pdo_mysql
 - Paso 1:
     - Crear una base de datos en PhpMyAdmin
     - Si no tenes ganas de usar la interfaz, utiliza las sguientes sentencias SQL:
-    ~~~
+    ~~~ sql
     CREATE DATABASE ejemplo;
     ~~~
 - Paso 2:
     - Crear tablas en la base de datos
     - Sentencias SQL de ejemplo:
-    ~~~
+    ~~~ sql
     CREATE TABLE tabla(
         id int NOT NULL AUTO_INCREMENT,
         nombre varchar(20) NOT NULL,
@@ -112,7 +112,7 @@ pdo_mysql
 - Paso 3:
     - Insertar valores a las tablas
     - Sentencias SQL de ejemplo:
-    ~~~
+    ~~~ sql
     INSERT INTO tabla (id, nombre, apellido, edad, valido, telefono) VALUES
     (10, "Fulano", "Detal", 20, 0, 2494000000),
     (12, "Mengano", "Mellamo", 25, 1, 2494000001),
@@ -122,17 +122,17 @@ pdo_mysql
     - Pasamos a un archivo .php a realizar la conexion con la base de datos
     - Pasos para realizar la conexion
         1. Abrimos la conexion.
-        ~~~
+        ~~~ php
         $db = new PDO('mysql:host=localhost;', 'dbname=ejemplo;charset=utf8', 'root', '');//("servidor", "nombre de la DB", "usuario", "contraseña")
         ~~~
         2. Enviamos una consulta SQL.
-        ~~~
+        ~~~ php
         $sentencia = $db->prepare( "select * from tabla");//realiza la consulta
         $sentencia->execute();//ejecuta la consulta en la DB
         $tareas = $sentencia->fetchAll(PDO::FETCH_OBJ);//transforma el resultado de la consulta en un arreglo de objetos
         ~~~
         3. Procesamos los datos. Es buena practica separar el procesamiento de los datos en un archivo a parte, separar HTML de DB
-        ~~~
+        ~~~ php
         foreach($tareas as $tarea) {
             echo $tarea->nombre;
         }
@@ -148,11 +148,11 @@ Consta de ingresar sentencias SQL dentro de los inputs HTML que utilizamos para 
 
 ## Malas practicas
 > Utilizar exec() apra insertar datos a nuestra DB
-~~~
+~~~ php
 $db->exec("INSERT INTO tarea(titulo)"."VALUES('".$tarea."')");
 ~~~
 Si bien se puede utilizar para insertar datos a una DB, no previene ataques de inyeccion SQL
-~~~
+~~~ php
 $db->lastInsertId() //nos devuelve el id del último elemento insertado
 ~~~
 
@@ -172,47 +172,47 @@ $db->lastInsertId() //nos devuelve el id del último elemento insertado
 
 # Insertar datos con PREPARE en PDO
 > prepare($sqlQuery) //permite la creacion de una sentencia "parametrizada" para su posterior uso
-~~~
+~~~ php
 $sentencia = $db->prepare("INSERT INTO tarea(titulo) VALUES(?)");
 ~~~
 >execulte($array) //ejecuta la sentencia con los paremetros del arreglo
-~~~
+~~~ php
 $sentencia->execute(array("Hacer la página de Web"));
 $sentencia->execute(array("Estudiar otras materias"));
 ~~~
 - El paso de parámetros le permite a PDO controlar y escapar las variables con contenido inseguro:
-~~~
+~~~ php
 $sentencia->execute(array("tarea’; DROP TABLE tarea; SELECT ‘"));
 ~~~
 - PDO escapará los caracteres problemáticos y el texto será insertado normalmente.
     - Devolver el ultimo ID insertado a la tabla
-    ~~~
+    ~~~ php
     $db->lastInsertId()
     ~~~
 
 ## Parametros enviados de forma asociativa
-~~~
+~~~ php
 $sentencia = $this->db->prepare("INSERT INTO tarea(titulo, descripcion)”."VALUES :titulo, :descripcion)");
 $sentencia->execute(array(":titulo"=>$tarea['titulo'], ":descripcion"=>$tarea 'descripcion']));
 ~~~
 
 # Borrar datos con PREPARE en PDO
 La sintaxis y el metodo es el mismo que para hacer un INSERT pero la sentencia SQL va a ser otra
-~~~
+~~~ php
 $sentencia = $db->prepare("delete from tarea where id=?");
 $sentencia->execute(array($id_tarea));
 ~~~
 
 # Modificar datos con PREPARE en PDO
 La sintaxis y el metodo es el mismo que para hacer un INSERT pero la sentencia SQL va a ser otra
-~~~
+~~~ php
 $sentencia = $db->prepare("UPDATE tarea SET Finalizada=1 "." WHERE idTarea=?");
 $sentencia->execute(array($tarea['id']));
 ~~~
 
 ## Checkear que no se rompio nada
 - ¿Como saber que filas fueron afectadas con la ultima sentencia SQL?
-~~~
+~~~ php
 $sentencia->rowCount() //nos dice cuántas filas fueron afectadas en la última ejecución. (También aplicable en INSERT o DELETE)
 ~~~
 
@@ -231,21 +231,21 @@ Las transacciones garantizan:
 
 ## Pasos para hacer transaccion en PDO
 En PDO una transacción comienza con: 
-~~~
+~~~ php
 $db->beginTransaction();
 ~~~
 Todas las operaciones siguientes serán ejecutadas en modo de transacción.
 
 La transacción se completa con:
-~~~
+~~~ php
 $db->commit();
 ~~~
 O se deshacen los cambios con:
-~~~
+~~~ php
 $db->rollBack();
 ~~~
 ### Solucion completa
-~~~
+~~~ php
 $db->beginTransaction();
 $consulta = $db->prepare('SELECT saldo'
                         .'FROM usuario WHERE idUsuario = ?');
@@ -265,7 +265,7 @@ Una excepción es la indicación de un problema que ocurre durante la ejecución
 
 Pueden ser capturadas encerrando las funciones que las producen en bloques try:
 >$bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-~~~
+~~~ php
 try{
    $db->beginTransaction();
    /* instrucciones que generan excepciones */
